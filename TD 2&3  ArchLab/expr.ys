@@ -3,7 +3,6 @@
     irmovq $5, %rbx
     subq %rbx, %rax
     jle Lelse
-
     mrmovq x, %rax
     irmovq $1, %rbx
     addq %rbx, %rax
@@ -14,5 +13,5 @@ Lend:
     rmmovq %rax, y
     halt
 .pos 0x100
-x: .quad 0x0c
+x: .quad -1
 y: .quad 0x00
