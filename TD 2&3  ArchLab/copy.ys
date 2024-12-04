@@ -1,0 +1,43 @@
+# MOAKHER Yessin yessin.moakher
+
+irmovq $0, %rax #result = 0
+mrmovq len, %rbx
+irmovq src, %rsi #copy src address
+irmovq dest, %rdi #copy dest address
+irmovq $8, %r8
+irmovq $1, %rcx
+LCond:
+    andq %rbx, %rbx      #len == 0
+    je Lend 
+    
+    mrmovq (%rsi), %rdx #val
+    rmmovq %rdx, (%rdi)
+    xorq %rdx, %rax
+    
+    addq %r8, %rsi
+    addq %r8, %rdi
+
+    
+    subq %rcx, %rbx
+    jmp LCond
+
+Lend:
+    rmmovq %rax, result
+    halt
+
+.align 8
+# Source block
+src:
+        .quad 0x00a
+        .quad 0x0b0
+        .quad 0xc00
+
+# Destination block
+dest:
+        .quad 0x111
+        .quad 0x222
+        .quad 0x333
+len:
+        .quad 0x3
+result:
+        .quad 0x0
